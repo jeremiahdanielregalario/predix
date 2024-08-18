@@ -26,10 +26,10 @@ def _show_item(item: Item, index: int) -> rx.Component:
         rx.color("accent", 3),
     )
     return rx.table.row(
-        rx.table.row_header_cell(item.name),
-        rx.table.cell(f"${item.payment}"),
-        rx.table.cell(item.date),
-        rx.table.cell(status_badge(item.status)),
+        rx.table.row_header_cell(item.class_code),
+        rx.table.cell(f"{item.schedule}"),
+        rx.table.cell(item.instructor),
+        rx.table.cell(f"{item.year}"),
         style={"_hover": {"bg": hover_color}, "bg": bg_color},
         align="center",
     )
@@ -123,12 +123,12 @@ def main_table() -> rx.Component:
                 ),
                 rx.select(
                     [
-                        "name",
-                        "payment",
-                        "date",
-                        "status",
+                        "class_code",
+                        "schedule",
+                        "instructor",
+                        "year",
                     ],
-                    placeholder="Sort By: Name",
+                    placeholder="Sort By: Class Code",
                     size="3",
                     on_change=TableState.set_sort_value,
                 ),
@@ -171,10 +171,10 @@ def main_table() -> rx.Component:
         rx.table.root(
             rx.table.header(
                 rx.table.row(
-                    _header_cell("Course Code", "user"),
-                    _header_cell("Schedule", "dollar-sign"),
-                    _header_cell("Time", "calendar"),
-                    _header_cell("Professor", "notebook-pen"),
+                    _header_cell("Class Code", "pen"),
+                    _header_cell("Schedule", "clock"),
+                    _header_cell("Instructor", "user"),
+                    _header_cell("Year & Semester", "calendar"),
                 ),
             ),
             rx.table.body(

@@ -1,15 +1,16 @@
 import reflex as rx
 from typing import Union, List
 import csv
-
+import pandas as pd
+import numpy as np
 
 class Item(rx.Base):
     """The item class."""
 
-    name: str
-    payment: float
-    date: str
-    status: str
+    class_code: str
+    schedule: str
+    instructor: str
+    year: str
 
 
 class TableState(rx.State):
@@ -31,18 +32,11 @@ class TableState(rx.State):
 
         # Filter items based on selected item
         if self.sort_value:
-            if self.sort_value in ["payment"]:
-                items = sorted(
-                    items,
-                    key=lambda item: float(getattr(item, self.sort_value)),
-                    reverse=self.sort_reverse,
-                )
-            else:
-                items = sorted(
-                    items,
-                    key=lambda item: str(getattr(item, self.sort_value)).lower(),
-                    reverse=self.sort_reverse,
-                )
+            items = sorted(
+                items,
+                key=lambda item: str(getattr(item, self.sort_value)).lower(),
+                reverse=self.sort_reverse,
+            )
 
         # Filter items based on search value
         if self.search_value:
@@ -53,10 +47,10 @@ class TableState(rx.State):
                 if any(
                     search_value in str(getattr(item, attr)).lower()
                     for attr in [
-                        "name",
-                        "payment",
-                        "date",
-                        "status",
+                        "class_code",
+                        "schedule",
+                        "instructor",
+                        "year",
                     ]
                 )
             ]
