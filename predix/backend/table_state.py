@@ -19,6 +19,7 @@ class TableState(rx.State):
     items: List[Item] = []
 
     search_value: str = ""
+    search_value1: str = ""
     sort_value: str = ""
     sort_reverse: bool = False
 
@@ -37,6 +38,12 @@ class TableState(rx.State):
                 key=lambda item: str(getattr(item, self.sort_value)).lower(),
                 reverse=self.sort_reverse,
             )
+            if self.sort_value == "class_code":
+                items = sorted(
+                items,
+                key=lambda item: float(str(getattr(item, self.sort_value)).split()[1]),
+                reverse=self.sort_reverse,
+            )
 
         # Filter items based on search value
         if self.search_value:
@@ -46,6 +53,22 @@ class TableState(rx.State):
                 for item in items
                 if any(
                     search_value in str(getattr(item, attr)).lower()
+                    for attr in [
+                        "class_code",
+                        "schedule",
+                        "instructor",
+                        "year",
+                    ]
+                )
+            ]
+            
+        if self.search_value1:
+            search_value1 = self.search_value1.lower()
+            items = [
+                item
+                for item in items
+                if any(
+                    search_value1 in str(getattr(item, attr)).lower()
                     for attr in [
                         "class_code",
                         "schedule",

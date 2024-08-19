@@ -51,7 +51,10 @@ def index() -> rx.Component:
         The UI for the overview page.
     """
     return rx.vstack(
-        rx.heading(f"Welcome to Predix!", size="5"),
+        rx.center(
+            rx.heading(f"Welcome to Predix!", size="9"),
+            width="100%"
+        ),
         rx.flex(
             rx.input(
                 rx.input.slot(rx.icon("search"), padding_left="0"),

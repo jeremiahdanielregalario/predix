@@ -15,10 +15,17 @@ def table() -> rx.Component:
         The UI for the table page.
     """
     return rx.vstack(
-        rx.heading("Classes Prompter", size="5"),
-        rx.text("Prompt math classes from year 2018 to 2023.", size="3"),
+        rx.center(
+            rx.heading("Classes Prompter", size="9"),
+            width="100%"
+        ),
+        rx.center(
+            rx.text("Prompt math classes from year 2018 to 2024.", size="3"),
+            width="100%"
+        ),
         main_table(),
         spacing="8",
         width="100%",
     )
+
 

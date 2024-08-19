@@ -29,9 +29,10 @@ def menu_item(text: str, url: str) -> rx.Component:
             rx.match(
                 text,
                 ("Overview", menu_item_icon("home")),
-                ("Table", menu_item_icon("table-2")),
+                ("Classes", menu_item_icon("table-2")),
                 ("About", menu_item_icon("book-open")),
                 ("Profile", menu_item_icon("user")),
+                ("Predict", menu_item_icon("home")),
                 ("Settings", menu_item_icon("settings")),
                 menu_item_icon("layout-dashboard"),
             ),
@@ -82,13 +83,13 @@ def navbar_footer() -> rx.Component:
     return rx.hstack(
         rx.link(
             rx.text("Docs", size="3"),
-            href="https://reflex.dev/docs/getting-started/introduction/",
+            href="/",
             color_scheme="gray",
             underline="none",
         ),
         rx.link(
             rx.text("Blog", size="3"),
-            href="https://reflex.dev/blog/",
+            href="/",
             color_scheme="gray",
             underline="none",
         ),
@@ -111,6 +112,7 @@ def menu_button() -> rx.Component:
         "/table",
         "/about",
         "/profile",
+        "/predict",
         "/settings",
     ]
 
@@ -190,7 +192,7 @@ def navbar() -> rx.Component:
             padding_y="1.25em",
             padding_x=["1em", "1em", "2em"],
         ),
-        display=["block", "block", "block", "block", "block", "none"],
+        display=["block", "block", "block", "block" "block", "block", "none"],
         position="sticky",
         background_color=rx.color("gray", 1),
         top="0px",
